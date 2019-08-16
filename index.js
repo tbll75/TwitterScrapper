@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 const FetchersEngine = require('./src/FetchersEngine')
+var Cron = require('node-cron');
 
 // clear node console
 process.stdout.write('\033c');
@@ -23,7 +24,7 @@ async function launchEngine()
     //FetchersEngine.getNewProfilesFromFollowers(currentProfileId, 100);
     //FetchersEngine.refreshTweetFromProfiles();
     //FetchersEngine.refreshProfiles();
-    FetchersEngine.getNewprofileFromSpreadsheet();
+    //FetchersEngine.getNewprofileFromSpreadsheet();
 
 
     // -- FOR TESTING
@@ -39,6 +40,11 @@ async function launchEngine()
     // -- FOR SPREADSHEET
     //var SpreadSheet = require ('./src/Storage/SpreadSheet/SpreadSheet');
 
+
+    // CRON
+    Cron.schedule('* 0,15,30,45 * * * *', () => {
+        FetchersEngine.refreshProfiles();
+    });
 
 
     console.log("end");

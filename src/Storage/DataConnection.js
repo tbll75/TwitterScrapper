@@ -25,8 +25,11 @@ module.exports = {
 
         await con;
 
-        //console.log("executeQuery: " + sql +  " / params: " + JSON.stringify(params));
-        if (showFullLog) console.log("executeQuery: " + sql);
+        if (showFullLog) 
+        {
+            console.log("executeQuery: " + sql);
+            console.log("params: " + JSON.stringify(params));
+        }
 
         try {
             let [rows, fields] = await con.query(sql, params);

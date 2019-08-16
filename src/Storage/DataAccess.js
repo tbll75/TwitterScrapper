@@ -4,13 +4,18 @@ var DataConnection = require ('./DataConnection')
 
 module.exports = {
 
-    getAllProfiles: async function (limit = -1) {
+    getAllProfiles: async function (limit = -1, order = "", showFullLog = false) {
 
+        //console.log("getAllProfiles");
         var profiles = null;
-        var query = "SELECT * FROM store.twProfiles" + (limit !== -1 ? (" limit " + limit) : "");
+        var query = "SELECT * FROM store.twProfiles "
+                        + order + " "
+                        + (limit !== -1 ? ("limit " + limit) : "") + " ";
+
+        //console.log(query);
 
         try {
-            profiles = await DataConnection.executeQuery (query);
+            profiles = await DataConnection.executeQuery (query, showFullLog);
             //console.log("getAllProfiles end");
             //console.log(profiles);
         }

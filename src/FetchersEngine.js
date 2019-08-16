@@ -1,9 +1,10 @@
-
+var ArrayExtensions = require ('./Util/ArrayExtensions.js');
 var Logger = require ('./Logger.js');
 var FakeResponse = require ('./Storage/FakeResponse');
 var FetchTwitter = require ('./Fetchers/FetchTwitter');
 var DataSave = require ('./Storage/DataSave');
 var DataAccess = require ('./Storage/DataAccess');
+
 
 module.exports = {
 
@@ -15,16 +16,23 @@ module.exports = {
 
         await SpreadSheet.init((oAuth2Client) => {
             const spreadsheetId ='1SLnUaCFiTzvXagZeaZoTux5mmLFwoqQCCtCPYm31ztw';
-            const range = 'result_first!A2:A10';
+            const range = 'result_first!A2:A';
     
-            SpreadSheet.fetchSpreadsheetContent(oAuth2Client, spreadsheetId, range, (rows) => {
-                rows.map(async (row) => {
-                    console.log("Handling row: " + row);
-                    let fullProfile = await FetchTwitter.getUser(row[0], true);
-                    if (fullProfile !== null)
-                        DataSave.saveProfiles([fullProfile]); 
+            SpreadSheet.fetchSpreadsheetContent(oAuth2Client, spreadsheetId, range, async (rows) => {
+
+                await ArrayExtensions.asyncForEach(rows, async (next, row, index, array) => {
+
+                    //console.log("row: " + row);
+                    //console.log("index: " + next);
+                    //console.log("array: " + index);
+                    //console.log("array: " + array);
+
+                    console.log("Row: " + next + "/" + (index.length-1) + " handling id: " + row);
+
+                    if (row !== null)
+                        await DataSave.saveProfileIds([row]); 
                     else
-                        console.log("Profile is null");
+                        console.log("Profile is null: " + row[0]);
                 });
             });
         });
@@ -75,9 +83,9 @@ module.exports = {
 
         console.log("refreshProfiles");
 
-        var profiles = await DataAccess.getAllProfiles();
+        var profiles = await DataAccess.getAllProfiles(2, "order by lastUpdate", true);
 
-        profiles.forEach(async element => {
+        /* profiles.forEach(async element => {
 
             let fullProfile = await FetchTwitter.getUser(element.idProfile, false);
             
@@ -88,7 +96,25 @@ module.exports = {
             else {
                 console.log("Fail to get Profile for: " + element.idProfile);
             }
-        });
+        }); */
+
+        if (profiles) {
+
+            await ArrayExtensions.asyncForEach(profiles, async (next, element, index, array) => {
+
+                //console.log(element);
+                let fullProfile = await FetchTwitter.getUser(element.idProfile, showFullLog = true);
+                if (fullProfile !== null) {
+                    console.log("Got data for Profile: " + fullProfile.screen_name);
+                    DataSave.saveProfiles([fullProfile], showFullLog = true); 
+                }
+                else {
+                    console.log("Fail to get Profile for: " + element.idProfile);
+                }
+            });
+        }
+        
+
 
     }
 

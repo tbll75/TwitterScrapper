@@ -2,14 +2,24 @@
 var FakeResponse = require('../Storage/FakeResponse');
 var Twitter = require('twitter');
 var config = require('./TwitterConfig.js');
+var DataSave = require('../Storage/DataSave');
 
 var T = new Twitter(config);
 
+global.dateRateLimited = null;
+global.isRateLimited = false;
 
 async function _makeTwitterCall(url, params, showFullLog)
 {
     console.log("Caling: " + url + " / params: " + JSON.stringify(params));
-    //console.log(params);
+    //console.log(global.isRateLimited);
+
+    //if (global.isRateLimited && (Date.now()-global.dateRateLimited > new Date(0,0,0,0,0,5))) {
+    if (global.isRateLimited) {
+
+        console.log ("Exit because Rate Limited");
+        return null;
+    }
     
     let response = null;
     try {
@@ -18,6 +28,18 @@ async function _makeTwitterCall(url, params, showFullLog)
     } catch (error) {
         if (showFullLog) console.log(error);
         //if (showFullLog && response !== null) console.log(response);
+
+        if (error[0].code ==  88) // Rate Limit
+        {
+            global.isRateLimited = true;
+            global.dateRateLimited = new Date(Date.now());
+            console.log("RATE LIMITED - " + global.dateRateLimited.toLocaleString());
+        }
+        else if (error[0].code ==  50) // User not found
+        {
+            //DataSave.deleteProfile()
+            throw error;
+        }
     }
     return response;
 }
@@ -54,8 +76,19 @@ module.exports = {
         var params = {
             user_id: id
         }
+
+        let response = null;
+
+        try { 
+            response = await _makeTwitterCall('users/show', params, showFullLog);
+        } catch (error) {
+            if (error[0].code ==  50) // User not found
+            {
+                DataSave.deleteProfile([id], showFullLog);
+            }
+        }
         
-        return _makeTwitterCall('users/show', params, showFullLog);
+        return response;
     },
 
 
