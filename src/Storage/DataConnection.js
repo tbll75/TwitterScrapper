@@ -12,7 +12,8 @@ module.exports = {
         console.log("createConnection start");
 
         con = await mysql.createConnection({
-            host: "localhost",
+            //host: "localhost",
+            host: "twitterscrapper.cfc6fjzutal3.eu-west-1.rds.amazonaws.com",
             user: "root",
             password: "bob110891",
             database: "store"
