@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "restart": "pm2 startOrRestart ecosystem.config.js",
+    "deploy": "pm2 deploy ecosystem.config.js production"
   },
   "author": "",
   "license": "ISC",
@@ -17,5 +19,8 @@
     "node-cron": "^2.0.3",
     "sleep": "^6.1.0",
     "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "pm2": "^3.5.1"
   }
 }
