@@ -10,8 +10,6 @@ process.stdout.write('\033c');
 app.get('/', (req, res) => { // new
     
     res.send("Hello");
-
-    console.log(FakeResponse.jsonFollowersId);
 });
 
 
