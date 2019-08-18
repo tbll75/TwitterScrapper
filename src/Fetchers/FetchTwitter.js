@@ -26,20 +26,23 @@ async function _makeTwitterCall(url, params, showFullLog)
         response = await T.get(url, params);
         if (showFullLog) console.log(response);
     } catch (error) {
-        if (showFullLog) console.log(error);
+        console.log(error);
         //if (showFullLog && response !== null) console.log(response);
 
-        if (error[0].code ==  88) // Rate Limit
-        {
-            global.isRateLimited = true;
-            global.dateRateLimited = new Date(Date.now());
-            console.log("RATE LIMITED - " + global.dateRateLimited.toLocaleString());
+        if (error[0] !== null) {
+            if (error[0].code ==  88) // Rate Limit
+            {
+                global.isRateLimited = true;
+                global.dateRateLimited = new Date(Date.now());
+                console.log("RATE LIMITED - " + global.dateRateLimited.toLocaleString());
+            }
+            else if (error[0].code ==  50) // User not found
+            {
+                //DataSave.deleteProfile()
+                throw error;
+            }
         }
-        else if (error[0].code ==  50) // User not found
-        {
-            //DataSave.deleteProfile()
-            throw error;
-        }
+        
     }
     return response;
 }

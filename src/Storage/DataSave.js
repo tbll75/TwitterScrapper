@@ -1,5 +1,23 @@
 const DataConnection = require ('./DataConnection');
 
+async function updateLastTweetFetchDate(id) {
+    let sql = "UPDATE store.twProfiles "
+                + "set lastTweetFetchDate = NOW() "
+                + "WHERE idProfile = ?"
+
+    let params = [
+        id 
+    ];
+
+    try {
+        await DataConnection.executeQuery (sql, params, showFullLog);
+        console.log("1 row added or modified");
+    }
+    catch (error) {
+        console.log("error: " + error);
+    }
+}
+
 module.exports = {
 
     saveProfileIds: async function (ids, showFullLog = false) {
@@ -87,6 +105,8 @@ module.exports = {
                 
                 await DataConnection.executeQuery (sql, params, showFullLog);
                 console.log("1 row added or modified");
+
+                await updateLastTweetFetchDate(profile.idProfile);
             }
             catch (error) {
                 if (error.message.includes("Duplicate") == false)

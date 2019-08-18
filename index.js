@@ -44,6 +44,12 @@ async function launchEngine()
         FetchersEngine.refreshProfiles();
     });
 
+    // TODO : 
+    // Add lastTweetFetchDate in DB
+    Cron.schedule('5,20,35,50 * * * *', () => {
+        FetchersEngine.refreshTweetFromProfiles();
+    });
+
 
     console.log("end");
 }

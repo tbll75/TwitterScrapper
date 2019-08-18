@@ -63,18 +63,21 @@ module.exports = {
     refreshTweetFromProfiles: async function () {
 
         console.log ("refreshTweetFromProfiles");
-        var profiles = await DataAccess.getAllProfiles(1);
+        var profiles = await DataAccess.getAllProfiles(100, "order by lastTweetFetchDate");
         //console.log(profiles);
 
-        if (profiles != null) {
-            profiles.forEach(async element => {
+        if (profiles !== null) {
+            // profiles.forEach(async element => {
+            await ArrayExtensions.asyncForEach(profiles, async (next, element, index, array) => {
 
                 //console.log("element");
                 //console.log(element.idProfile);
                 
                 var tweets = await FetchTwitter.getLatestTweet(element.idProfile, 10);
                 //console.log(tweets);
-                DataSave.saveTweets(element, tweets);
+                if (tweets !== null) {
+                    await DataSave.saveTweets(element, tweets,showFullLog = false);
+                }
             });
         }
     },
@@ -83,7 +86,7 @@ module.exports = {
 
         console.log("refreshProfiles");
 
-        var profiles = await DataAccess.getAllProfiles(2, "order by lastUpdate", true);
+        var profiles = await DataAccess.getAllProfiles(2, "order by lastUpdate", false);
 
         /* profiles.forEach(async element => {
 
@@ -103,19 +106,15 @@ module.exports = {
             await ArrayExtensions.asyncForEach(profiles, async (next, element, index, array) => {
 
                 //console.log(element);
-                let fullProfile = await FetchTwitter.getUser(element.idProfile, showFullLog = true);
+                let fullProfile = await FetchTwitter.getUser(element.idProfile, showFullLog = false);
                 if (fullProfile !== null) {
                     console.log("Got data for Profile: " + fullProfile.screen_name);
-                    DataSave.saveProfiles([fullProfile], showFullLog = true); 
+                    DataSave.saveProfiles([fullProfile], showFullLog = false); 
                 }
                 else {
                     console.log("Fail to get Profile for: " + element.idProfile);
                 }
             });
         }
-        
-
-
     }
-
 }
