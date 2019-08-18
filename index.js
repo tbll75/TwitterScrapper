@@ -42,7 +42,7 @@ async function launchEngine()
 
 
     // CRON
-    Cron.schedule('* 0,15,30,45 * * * *', () => {
+    Cron.schedule('0,15,30,45 * * * *', () => {
         FetchersEngine.refreshProfiles();
     });
 
