@@ -36,9 +36,8 @@ async function _makeTwitterCall(url, params, showFullLog)
                 global.dateRateLimited = new Date(Date.now());
                 console.log("RATE LIMITED - " + global.dateRateLimited.toLocaleString());
             }
-            else if (error[0].code ==  50) // User not found
+            else 
             {
-                //DataSave.deleteProfile()
                 throw error;
             }
         }
@@ -85,15 +84,21 @@ module.exports = {
         try { 
             response = await _makeTwitterCall('users/show', params, showFullLog);
         } catch (error) {
-            if (error[0].code ==  50) // User not found
+
+            if (error[0].code ==  50 || // User not found
+                error[0].code ==  63) // User has been suspended
             {
                 DataSave.deleteProfile([id], showFullLog);
+            }
+            else
+            {
+                console.log(error);
+                DataSave.updateLastUpdate(id);
             }
         }
         
         return response;
     },
-
 
     getFollowerIds: function (id, count, showFullLog=false) {
 

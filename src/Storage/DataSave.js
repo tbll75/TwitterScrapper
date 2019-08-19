@@ -20,6 +20,24 @@ async function updateLastTweetFetchDate(id) {
 
 module.exports = {
 
+    updateLastUpdate: async function (id) {
+        let sql = "UPDATE store.twProfiles "
+                    + "set lastUpdate = NOW() "
+                    + "WHERE idProfile = ?"
+    
+        let params = [
+            id 
+        ];
+    
+        try {
+            await DataConnection.executeQuery (sql, params, showFullLog);
+            console.log("1 row added or modified");
+        }
+        catch (error) {
+            console.log("error: " + error);
+        }
+    },
+
     saveProfileIds: async function (ids, showFullLog = false) {
 
         ids.forEach(async element => {

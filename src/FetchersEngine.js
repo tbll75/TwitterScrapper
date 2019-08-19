@@ -86,7 +86,7 @@ module.exports = {
 
         console.log("refreshProfiles");
 
-        var profiles = await DataAccess.getAllProfiles(2, "order by lastUpdate", false);
+        var profiles = await DataAccess.getAllProfiles(100, "order by lastUpdate", false);
 
         /* profiles.forEach(async element => {
 
