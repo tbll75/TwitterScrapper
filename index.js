@@ -38,6 +38,8 @@ async function launchEngine()
     // -- FOR SPREADSHEET
     //var SpreadSheet = require ('./src/Storage/SpreadSheet/SpreadSheet');
 
+    console.log("Display environment: ")
+    console.log(process.env.NODE_ENV);
 
     // CRON
     Cron.schedule('0,15,30,45 * * * *', () => {
