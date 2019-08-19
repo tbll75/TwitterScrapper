@@ -20,7 +20,7 @@ async function launchEngine()
 
     var currentProfileId = 470129898;
     //FetchersEngine.getNewProfilesFromFollowers(currentProfileId, 100);
-    //FetchersEngine.refreshTweetFromProfiles();
+    //FetchersEngine.refreshTweetFromProfiles(3);
     //FetchersEngine.refreshProfiles();
     //FetchersEngine.getNewprofileFromSpreadsheet();
 
@@ -38,8 +38,8 @@ async function launchEngine()
     // -- FOR SPREADSHEET
     //var SpreadSheet = require ('./src/Storage/SpreadSheet/SpreadSheet');
 
-    console.log("Display environment: ")
-    console.log(process.env.NODE_ENV);
+    //console.log("Display environment: ")
+    //console.log(application.);
 
     // CRON
     Cron.schedule('0,15,30,45 * * * *', () => {

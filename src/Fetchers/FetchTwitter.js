@@ -29,7 +29,7 @@ async function _makeTwitterCall(url, params, showFullLog)
         console.log(error);
         //if (showFullLog && response !== null) console.log(response);
 
-        if (error[0] !== null) {
+        if (error[0] !== undefined) {
             if (error[0].code ==  88) // Rate Limit
             {
                 global.isRateLimited = true;
@@ -37,10 +37,10 @@ async function _makeTwitterCall(url, params, showFullLog)
                 console.log("RATE LIMITED - " + global.dateRateLimited.toLocaleString());
             }
             else 
-            {
                 throw error;
-            }
         }
+        else 
+            throw error;
         
     }
     return response;
@@ -85,15 +85,17 @@ module.exports = {
             response = await _makeTwitterCall('users/show', params, showFullLog);
         } catch (error) {
 
-            if (error[0].code ==  50 || // User not found
-                error[0].code ==  63) // User has been suspended
-            {
-                DataSave.deleteProfile([id], showFullLog);
-            }
-            else
-            {
-                console.log(error);
-                DataSave.updateLastUpdate(id);
+            if (error[0] !== undefined) {
+                if (error[0].code ==  50 || // User not found
+                    error[0].code ==  63) // User has been suspended
+                {
+                    DataSave.deleteProfile([id], showFullLog);
+                }
+                else
+                {
+                    console.log(error);
+                    DataSave.updateLastUpdate(id);
+                }
             }
         }
         
@@ -134,7 +136,31 @@ module.exports = {
             count: count,
         }
 
-        return _makeTwitterCall('statuses/user_timeline', params, showFullLog);
+        let response = null;
+
+        try { 
+            response = await _makeTwitterCall('statuses/user_timeline', params, showFullLog);
+        } catch (error) {
+
+            console.log("Error fetching: " + id);
+            if (error[0] !== undefined) {
+                if (error[0].code ==  50 || // User not found
+                    error[0].code ==  63) // User has been suspended
+                {
+                    await DataSave.deleteProfile([id], showFullLog);
+                }
+                else
+                {
+                    console.log(error);
+                    await DataSave.updateLastUpdate(id, showFullLog, "lastTweetFetchDate");
+                }
+            }
+            else
+                await DataSave.updateLastUpdate(id, showFullLog, "lastTweetFetchDate");
+
+        }
+
+        return response;
     },
 
 

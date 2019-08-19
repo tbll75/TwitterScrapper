@@ -60,10 +60,12 @@ module.exports = {
         }
     },
 
-    refreshTweetFromProfiles: async function () {
+    refreshTweetFromProfiles: async function (overideFetchNumber = -1) {
 
-        console.log ("refreshTweetFromProfiles");
-        var profiles = await DataAccess.getAllProfiles(100, "order by lastTweetFetchDate");
+        let nbProfileToFetch = overideFetchNumber != -1 ? overideFetchNumber : 1500;
+
+        console.log ("refreshTweetFromProfiles will fetch: " + nbProfileToFetch);
+        var profiles = await DataAccess.getAllProfiles(nbProfileToFetch, "order by lastTweetFetchDate");
         //console.log(profiles);
 
         if (profiles !== null) {
@@ -82,11 +84,13 @@ module.exports = {
         }
     },
 
-    refreshProfiles: async function () {
+    refreshProfiles: async function (overideFetchNumber = -1) {
 
         console.log("refreshProfiles");
 
-        var profiles = await DataAccess.getAllProfiles(100, "order by lastUpdate", false);
+        let nbProfileToFetch = overideFetchNumber != -1 ? overideFetchNumber : 900;
+
+        var profiles = await DataAccess.getAllProfiles(nbProfileToFetch, "order by lastUpdate", false);
 
         /* profiles.forEach(async element => {
 

@@ -20,9 +20,12 @@ async function updateLastTweetFetchDate(id) {
 
 module.exports = {
 
-    updateLastUpdate: async function (id) {
+    updateLastUpdate: async function (id, showFullLog = false, field = "lastUpdate") {
+
+        console.log("updateLastUpdate");
+
         let sql = "UPDATE store.twProfiles "
-                    + "set lastUpdate = NOW() "
+                    + "set " + field + " = NOW() "
                     + "WHERE idProfile = ?"
     
         let params = [
