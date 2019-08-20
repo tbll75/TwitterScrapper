@@ -4,7 +4,7 @@ module.exports = {
     {
         for (let i = 0; i < ar.length; i++) {
 
-            console.log("i: " + i);
+            //console.log("i: " + i);
             await callback.call(ar, i, ar[i], ar);
         }
     },
