@@ -21,7 +21,7 @@ async function launchEngine()
     var currentProfileId = 470129898;
     //FetchersEngine.getNewProfilesFromFollowers(currentProfileId, 100);
     //FetchersEngine.refreshTweetFromProfiles(3);
-    FetchersEngine.refreshProfiles(3);
+    //FetchersEngine.refreshProfiles(3);
     //FetchersEngine.getNewprofileFromSpreadsheet();
 
 
