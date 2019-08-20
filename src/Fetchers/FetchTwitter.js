@@ -17,7 +17,7 @@ async function _makeTwitterCall(url, params, showFullLog)
     //if (global.isRateLimited && (Date.now()-global.dateRateLimited > new Date(0,0,0,0,0,5))) {
     if (global.isRateLimited) {
 
-        console.log (Date.now() + " - Exit because Rate Limited");
+        console.log (Date.now().toLocaleString() + " - Exit because Rate Limited");
         return null;
     }
     
