@@ -1,4 +1,5 @@
 const DataConnection = require ('./DataConnection');
+const logger = require ('../Util/Logger');
 
 async function updateLastTweetFetchDate(id) {
     let sql = "UPDATE store.twProfiles "
@@ -11,10 +12,10 @@ async function updateLastTweetFetchDate(id) {
 
     try {
         await DataConnection.executeQuery (sql, params, showFullLog);
-        console.log("1 row added or modified");
+        logger.info("1 row added or modified");
     }
     catch (error) {
-        console.log("error: " + error);
+        logger.info("error: " + error);
     }
 }
 
@@ -22,7 +23,7 @@ module.exports = {
 
     updateLastUpdate: async function (id, showFullLog = false, field = "lastUpdate") {
 
-        console.log("updateLastUpdate");
+        logger.info("updateLastUpdate");
 
         let sql = "UPDATE store.twProfiles "
                     + "set " + field + " = NOW() "
@@ -34,10 +35,10 @@ module.exports = {
     
         try {
             await DataConnection.executeQuery (sql, params, showFullLog);
-            console.log("1 row added or modified");
+            logger.info("1 row added or modified");
         }
         catch (error) {
-            console.log("error: " + error);
+            logger.info("error: " + error);
         }
     },
 
@@ -52,10 +53,10 @@ module.exports = {
 
             try {
                 await DataConnection.executeQuery (sql, params, showFullLog);
-                console.log("1 row added or modified");
+                logger.info("1 row added or modified");
             }
             catch (error) {
-                console.log("error: " + error);
+                logger.info("error: " + error);
             }
 
         });
@@ -65,7 +66,7 @@ module.exports = {
 
     saveProfiles: async function (profiles, showFullLog = false) {
 
-        //console.log (profiles);
+        //logger.info (profiles);
 
         profiles.forEach(async element => {
             let sql = "INSERT INTO store.twProfiles (idProfile, name, screenName, nbFollowers, nbFriends, lastUpdate) VALUES (?, ?, ?, ?, ?, NOW()) "
@@ -88,10 +89,10 @@ module.exports = {
 
             try {
                 await DataConnection.executeQuery (sql, params, showFullLog);
-                console.log("1 row added or modified");
+                logger.info("1 row added or modified");
             }
             catch (error) {
-                console.log("error: " + error);
+                logger.info("error: " + error);
             }
 
         });
@@ -112,7 +113,7 @@ module.exports = {
                         + "lastUpdate = NOW() ";
 
                 let fav = element.retweeted_status === undefined ? element.favorite_count : element.retweeted_status.favorite_count;
-                //console.log("fav: " + fav);
+                //logger.info("fav: " + fav);
 
                 let params = [
                     element.id_str, 
@@ -125,15 +126,15 @@ module.exports = {
                 params = params.concat([params[2],params[3],params[4]]);
                 
                 await DataConnection.executeQuery (sql, params, showFullLog);
-                console.log("1 row added or modified");
+                logger.info("1 row added or modified");
 
                 await updateLastTweetFetchDate(profile.idProfile);
             }
             catch (error) {
                 if (error.message.includes("Duplicate") == false)
                 {
-                    console.log("error: " + error);
-                    console.log(element);
+                    logger.info("error: " + error);
+                    logger.info(element);
                 }
             }
 
@@ -144,7 +145,7 @@ module.exports = {
 
     deleteProfile: async function (idprofiles, showFullLog)
     {
-        //console.log("deleteProfile");
+        //logger.info("deleteProfile");
 
         idprofiles.forEach(async element => {
 
@@ -167,10 +168,10 @@ module.exports = {
                 ];
 
                 await DataConnection.executeQuery (sqlProfile, paramsProfile, showFullLog);
-                console.log("Profile deleted: " + element);
+                logger.info("Profile deleted: " + element);
             }
             catch (error) {
-                console.log("error: " + error);
+                logger.info("error: " + error);
             }
 
         });

@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const logger = require ('./src/Util/Logger');
 
 const FetchersEngine = require('./src/FetchersEngine')
 var Cron = require('node-cron');
@@ -20,7 +21,7 @@ async function launchEngine()
 
     var currentProfileId = 470129898;
     //FetchersEngine.getNewProfilesFromFollowers(currentProfileId, 100);
-    await FetchersEngine.refreshTweetFromProfiles(2);
+    //await FetchersEngine.refreshTweetFromProfiles(2);
     await FetchersEngine.refreshProfiles(2);
     //FetchersEngine.getNewprofileFromSpreadsheet();
 
@@ -33,13 +34,11 @@ async function launchEngine()
     //let response = await FetchTwitter.getFollowerIds("470129898",10);
     //let response = await FetchTwitter.getUser("470129898");
     //let response = await FetchTwitter.getLatestTweet("19060199", 10);
-    //console.log(response);
+    //logger.info(response);
 
     // -- FOR SPREADSHEET
     //var SpreadSheet = require ('./src/Storage/SpreadSheet/SpreadSheet');
 
-    //console.log("Display environment: ")
-    //console.log(application.);
 
     // CRON
     Cron.schedule('0,15,30,45 * * * *', () => {
@@ -53,10 +52,10 @@ async function launchEngine()
     });
 
 
-    console.log("end");
+    logger.info("end");
 }
 
 
 launchEngine();
 
-app.listen(3000, () => console.log('listening on port 3000'));
+app.listen(3000, () => logger.info('listening on port 3000'));

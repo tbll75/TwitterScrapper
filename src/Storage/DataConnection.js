@@ -1,6 +1,7 @@
 //var mysql = require('mysql');
 var mysql = require('mysql2/promise');
 const util = require('util');
+const logger = require ('../Util/Logger');
 
 var con;
 
@@ -9,7 +10,7 @@ module.exports = {
 
     createConnection: async function ()
     {
-        console.log("createConnection start");
+        logger.info("createConnection start");
 
         con = await mysql.createConnection({
             //host: "localhost",
@@ -19,7 +20,7 @@ module.exports = {
             database: "store"
         });
 
-        //console.log("createConnection end");
+        //logger.info("createConnection end");
     },
 
     executeQuery: async function (sql, params, showFullLog) {
@@ -28,8 +29,8 @@ module.exports = {
 
         if (showFullLog) 
         {
-            console.log("executeQuery: " + sql);
-            console.log("params: " + JSON.stringify(params));
+            logger.info("executeQuery: " + sql);
+            logger.info("params: " + JSON.stringify(params));
         }
 
         try {
@@ -37,7 +38,7 @@ module.exports = {
             return rows;
         }
         catch (error) {
-            console.log(error.message);
+            logger.info(error.message);
             throw error;
         }
     }

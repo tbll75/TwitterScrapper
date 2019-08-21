@@ -4,13 +4,14 @@ var FakeResponse = require ('./Storage/FakeResponse');
 var FetchTwitter = require ('./Fetchers/FetchTwitter');
 var DataSave = require ('./Storage/DataSave');
 var DataAccess = require ('./Storage/DataAccess');
+const logger = require ('./Util/Logger');
 
 
 module.exports = {
 
     getNewprofileFromSpreadsheet: async function () {
 
-        console.log("getNewprofileFromSpreadsheet");
+        logger.info("getNewprofileFromSpreadsheet");
 
         var SpreadSheet = require ('./Storage/SpreadSheet/SpreadSheet');
 
@@ -22,17 +23,17 @@ module.exports = {
 
                 await ArrayExtensions.asyncForEach(rows, async (next, row, index, array) => {
 
-                    //console.log("row: " + row);
-                    //console.log("index: " + next);
-                    //console.log("array: " + index);
-                    //console.log("array: " + array);
+                    //logger.info("row: " + row);
+                    //logger.info("index: " + next);
+                    //logger.info("array: " + index);
+                    //logger.info("array: " + array);
 
-                    console.log("Row: " + next + "/" + (index.length-1) + " handling id: " + row);
+                    logger.info("Row: " + next + "/" + (index.length-1) + " handling id: " + row);
 
                     if (row !== null)
                         await DataSave.saveProfileIds([row]); 
                     else
-                        console.log("Profile is null: " + row[0]);
+                        logger.info("Profile is null: " + row[0]);
                 });
             });
         });
@@ -41,18 +42,18 @@ module.exports = {
 
     getNewProfilesFromFollowers: async function (currentProfileId, count) {
 
-        console.log ("getNewProfiles");
+        logger.info ("getNewProfiles");
         let profiles = [];
         let profileIds = await FetchTwitter.getFollowerIds(currentProfileId, count);
-        //console.log(profileIds);
+        //logger.info(profileIds);
 
         if (profileIds !== undefined) {
             profileIds.ids.forEach (async element =>  {
                 
                 if (element !== undefined) {
-                    console.log("e: " +element);
+                    logger.info("e: " +element);
                     let fullProfile = await FetchTwitter.getUser(element);
-                    //console.log(fullProfile);
+                    //logger.info(fullProfile);
                     if (fullProfile !== null)
                         DataSave.saveProfiles([fullProfile]); 
                 }
@@ -64,19 +65,19 @@ module.exports = {
 
         let nbProfileToFetch = overideFetchNumber != -1 ? overideFetchNumber : 1500;
 
-        console.log ("refreshTweetFromProfiles will fetch: " + nbProfileToFetch);
+        logger.info ("refreshTweetFromProfiles will fetch: " + nbProfileToFetch);
         var profiles = await DataAccess.getAllProfiles(nbProfileToFetch, "order by lastTweetFetchDate");
-        //console.log(profiles);
+        //logger.info(profiles);
 
         if (profiles !== null) {
             // profiles.forEach(async element => {
             await ArrayExtensions.asyncForEach(profiles, async (next, element, index, array) => {
 
-                //console.log("element");
-                //console.log(element.idProfile);
+                //logger.info("element");
+                //logger.info(element.idProfile);
                 
                 var tweets = await FetchTwitter.getLatestTweet(element.idProfile, 10);
-                //console.log(tweets);
+                //logger.info(tweets);
                 if (tweets !== null) {
                     await DataSave.saveTweets(element, tweets,showFullLog = false);
                 }
@@ -86,7 +87,7 @@ module.exports = {
 
     refreshProfiles: async function (overideFetchNumber = -1) {
 
-        console.log("refreshProfiles");
+        logger.info("refreshProfiles");
 
         let nbProfileToFetch = overideFetchNumber != -1 ? overideFetchNumber : 900;
 
@@ -97,11 +98,11 @@ module.exports = {
             let fullProfile = await FetchTwitter.getUser(element.idProfile, false);
             
             if (fullProfile !== null) {
-                console.log("Got data for Profile: " + fullProfile.screen_name);
+                logger.info("Got data for Profile: " + fullProfile.screen_name);
                 DataSave.saveProfiles([fullProfile], false); 
             }
             else {
-                console.log("Fail to get Profile for: " + element.idProfile);
+                logger.info("Fail to get Profile for: " + element.idProfile);
             }
         }); */
 
@@ -109,14 +110,14 @@ module.exports = {
 
             await ArrayExtensions.asyncForEach(profiles, async (next, element, index, array) => {
 
-                //console.log(element);
+                //logger.info(element);
                 let fullProfile = await FetchTwitter.getUser(element.idProfile, showFullLog = false);
                 if (fullProfile !== null) {
-                    console.log("Got data for Profile: " + fullProfile.screen_name);
+                    logger.info("Got data for Profile: " + fullProfile.screen_name);
                     DataSave.saveProfiles([fullProfile], showFullLog = false); 
                 }
                 else {
-                    console.log("Fail to get Profile for: " + element.idProfile);
+                    logger.info("Fail to get Profile for: " + element.idProfile);
                 }
             });
         }

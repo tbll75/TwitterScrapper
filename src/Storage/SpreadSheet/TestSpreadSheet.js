@@ -11,7 +11,7 @@ const TOKEN_PATH = 'token.json';
 
 // Load client secrets from a local file.
 fs.readFile('credentials.json', (err, content) => {
-    if (err) return console.log('Error loading client secret file:', err);
+    if (err) return logger.info('Error loading client secret file:', err);
     // Authorize a client with credentials, then call the Google Sheets API.
     authorize(JSON.parse(content), listMajors);
 });
@@ -46,7 +46,7 @@ function getNewToken(oAuth2Client, callback) {
         access_type: 'offline',
         scope: SCOPES,
     });
-    console.log('Authorize this app by visiting this url:', authUrl);
+    logger.info('Authorize this app by visiting this url:', authUrl);
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
@@ -59,7 +59,7 @@ function getNewToken(oAuth2Client, callback) {
             // Store the token to disk for later program executions
             fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
                 if (err) return console.error(err);
-                console.log('Token stored to', TOKEN_PATH);
+                logger.info('Token stored to', TOKEN_PATH);
             });
             callback(oAuth2Client);
         });
@@ -77,16 +77,16 @@ function listMajors(auth) {
         spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
         range: 'Class Data!A2:E',
     }, (err, res) => {
-        if (err) return console.log('The API returned an error: ' + err);
+        if (err) return logger.info('The API returned an error: ' + err);
         const rows = res.data.values;
         if (rows.length) {
-            console.log('Name, Major:');
+            logger.info('Name, Major:');
             // Print columns A and E, which correspond to indices 0 and 4.
             rows.map((row) => {
-                console.log(`${row[0]}, ${row[4]}`);
+                logger.info(`${row[0]}, ${row[4]}`);
             });
         } else {
-            console.log('No data found.');
+            logger.info('No data found.');
         }
     });
 }

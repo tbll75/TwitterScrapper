@@ -3,6 +3,7 @@ var FakeResponse = require('../Storage/FakeResponse');
 var Twitter = require('twitter');
 var config = require('./TwitterConfig.js');
 var DataSave = require('../Storage/DataSave');
+const logger = require ('../Util/Logger');
 
 var T = new Twitter(config);
 
@@ -11,23 +12,23 @@ global.isRateLimited = false;
 
 async function _makeTwitterCall(url, params, showFullLog)
 {
-    console.log("Caling: " + url + " / params: " + JSON.stringify(params));
-    //console.log(global.isRateLimited);
+    logger.info("Caling: " + url + " / params: " + JSON.stringify(params));
+    //logger.info(global.isRateLimited);
 
     //if (global.isRateLimited && (Date.now()-global.dateRateLimited > new Date(0,0,0,0,0,5))) {
     if (global.isRateLimited) {
 
-        console.log (Date.now().toLocaleString() + " - Exit because Rate Limited");
+        logger.info (Date.now().toLocaleString() + " - Exit because Rate Limited");
         return null;
     }
     
     let response = null;
     try {
         response = await T.get(url, params);
-        if (showFullLog) console.log(response);
+        if (showFullLog) logger.info(response);
     } catch (error) {
-        console.log(error);
-        //if (showFullLog && response !== null) console.log(response);
+        logger.error(error);
+        //if (showFullLog && response !== null) logger.info(response);
 
 
         if (error[0]) {
@@ -35,7 +36,7 @@ async function _makeTwitterCall(url, params, showFullLog)
             {
                 global.isRateLimited = true;
                 global.dateRateLimited = new Date(Date.now());
-                console.log("RATE LIMITED - " + global.dateRateLimited.toLocaleString());
+                logger.info("RATE LIMITED - " + global.dateRateLimited.toLocaleString());
             }
             else 
                 throw error;
@@ -52,7 +53,7 @@ module.exports = {
 
     searchTweets: async function (search, count, result_type, lang, showFullLog=false) {
 
-        console.log("searchTweets");
+        logger.info("searchTweets");
 
         var params = {
             q: search,
@@ -94,7 +95,7 @@ module.exports = {
                 }
                 else
                 {
-                    console.log(error);
+                    logger.info(error);
                     DataSave.updateLastUpdate(id);
                 }
             }
@@ -130,7 +131,7 @@ module.exports = {
 
     getLatestTweet: async function(id, count, showFullLog=false) {
 
-        console.log("Fetching tweets of id " + id);
+        logger.info("Fetching tweets of id " + id);
 
         var params = {
             user_id: id,
@@ -143,7 +144,7 @@ module.exports = {
             response = await _makeTwitterCall('statuses/user_timeline', params, showFullLog);
         } catch (error) {
 
-            console.log("Error fetching: " + id);
+            logger.info("Error fetching: " + id);
             if (error[0] !== undefined) {
                 if (error[0].code ==  50 || // User not found
                     error[0].code ==  63) // User has been suspended
@@ -152,7 +153,7 @@ module.exports = {
                 }
                 else
                 {
-                    console.log(error);
+                    logger.info(error);
                     await DataSave.updateLastUpdate(id, showFullLog, "lastTweetFetchDate");
                 }
             }

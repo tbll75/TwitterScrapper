@@ -1,0 +1,218 @@
+{"message":"Hello again distributed logs","level":"info","service":"user-service"}
+{"message":"Hello again distributed logs","level":"info","service":"user-service"}
+{"message":"Hello again distributed logs","level":"info","service":"user-service"}
+{"message":"Hello again distributed logs","level":"info","service":"user-service"}
+{"message":"Hello again distributed logs","level":"info","service":"user-service"}
+{"message":"test","level":"info","service":"user-service"}
+{"message":"Hello again distributed logs","level":"info","service":"user-service"}
+{"message":"createConnection start","level":"info","service":"user-service"}
+{"message":"listening on port 3000","level":"info","service":"user-service"}
+{"message":"test","level":"info","service":"user-service"}
+{"message":"end","level":"info","service":"user-service"}
+{"message":"Hello again distributed logs","level":"info","service":"user-service"}
+{"message":"createConnection start","level":"info","service":"user-service"}
+{"message":"listening on port 3000","level":"info","service":"user-service"}
+{"message":"refreshProfiles","level":"info","service":"user-service"}
+{"message":"Caling: users/show / params: {\"user_id\":\"22484620\"}","level":"info","service":"user-service"}
+{"message":"Got data for Profile: ingorammer","level":"info","service":"user-service"}
+{"message":"Caling: users/show / params: {\"user_id\":\"22487278\"}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Got data for Profile: E_Sheninger","level":"info","service":"user-service"}
+{"message":"test","level":"info","service":"user-service"}
+{"message":"end","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Hello again distributed logs","level":"info","service":"user-service"}
+{"message":"createConnection start","level":"info","service":"user-service"}
+{"message":"listening on port 3000","level":"info","service":"user-service"}
+{"message":"refreshProfiles","level":"info","service":"user-service"}
+{"message":"Caling: users/show / params: {\"user_id\":\"22493155\"}","level":"info","service":"user-service"}
+{"message":"Got data for Profile: wwwstrategist","level":"info","service":"user-service"}
+{"message":"Caling: users/show / params: {\"user_id\":\"22497989\"}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Got data for Profile: _architexture_","level":"info","service":"user-service"}
+{"message":"test","level":"info","service":"user-service"}
+{"message":"test2","level":"warn","service":"user-service"}
+{"message":"end","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Hello again distributed logs","level":"info","service":"user-service"}
+{"message":"createConnection start","level":"info","service":"user-service"}
+{"message":"listening on port 3000","level":"info","service":"user-service"}
+{"message":"refreshProfiles","level":"info","service":"user-service"}
+{"message":"Caling: users/show / params: {\"user_id\":\"22498966\"}","level":"info","service":"user-service"}
+{"message":"Got data for Profile: ahmadajmi","level":"info","service":"user-service"}
+{"message":"Caling: users/show / params: {\"user_id\":\"22501453\"}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Got data for Profile: wmmihaa","level":"info","service":"user-service"}
+{"message":"test","level":"info","service":"user-service"}
+{"message":"test2","level":"warn","service":"user-service"}
+{"message":"test3","level":"error","service":"user-service"}
+{"message":"end","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"refreshTweetFromProfiles will fetch: 1500","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 13315","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"13315\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 645153","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"645153\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 652983","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"652983\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 6443362","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"6443362\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 11025002","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"11025002\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 11718512","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"11718512\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 14047540","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"14047540\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 14047729","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"14047729\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 14047816","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"14047816\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 14048094","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"14048094\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 14048110","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"14048110\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 14048252","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"14048252\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 14048658","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"14048658\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 14048978","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"14048978\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 14048987","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"14048987\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 14049429","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"14049429\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"Fetching tweets of id 14049591","level":"info","service":"user-service"}
+{"message":"Caling: statuses/user_timeline / params: {\"user_id\":\"14049591\",\"count\":10}","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+{"message":"1 row added or modified","level":"info","service":"user-service"}
+2019-08-21T11:06:37.696Z [right meow!] info: Hello again distributed logs
+2019-08-21T11:06:37.957Z [right meow!] info: createConnection start
+2019-08-21T11:06:37.968Z [right meow!] info: listening on port 3000
+2019-08-21T11:06:38.144Z [right meow!] info: refreshProfiles
+2019-08-21T11:06:38.187Z [right meow!] info: Caling: users/show / params: {"user_id":"22506784"}
+2019-08-21T11:06:38.420Z [right meow!] info: Got data for Profile: louisdorard
+2019-08-21T11:06:38.421Z [right meow!] info: Caling: users/show / params: {"user_id":"22507996"}
+2019-08-21T11:06:38.445Z [right meow!] info: 1 row added or modified
+2019-08-21T11:06:38.613Z [right meow!] info: Got data for Profile: massimobarone
+2019-08-21T11:06:38.618Z [right meow!] info: end
+2019-08-21T11:06:38.636Z [right meow!] info: 1 row added or modified
+2019-08-21T11:07:11.671Z [right meow!] info: Hello again distributed logs
+2019-08-21T11:07:11.772Z [right meow!] info: createConnection start
+2019-08-21T11:07:11.780Z [right meow!] info: listening on port 3000
+2019-08-21T11:07:11.954Z [right meow!] info: refreshProfiles
+2019-08-21T11:07:11.999Z [right meow!] info: Caling: users/show / params: {"user_id":"22509548"}
+2019-08-21T11:07:12.230Z [right meow!] info: Got data for Profile: DarrellIssa
+2019-08-21T11:07:12.231Z [right meow!] info: Caling: users/show / params: {"user_id":"22510140"}
+2019-08-21T11:07:12.256Z [right meow!] info: 1 row added or modified
+2019-08-21T11:07:12.408Z [right meow!] info: Got data for Profile: pablostanley
+2019-08-21T11:07:12.413Z [right meow!] info: end
+2019-08-21T11:07:12.430Z [right meow!] info: 1 row added or modified
+2019-08-21T11:09:16.034Z [right meow!] info: Hello again distributed logs
+2019-08-21T11:09:16.135Z [right meow!] info: createConnection start
+2019-08-21T11:09:16.142Z [right meow!] info: listening on port 3000
+2019-08-21T11:09:16.309Z [right meow!] info: refreshProfiles
+2019-08-21T11:09:16.356Z [right meow!] info: Caling: users/show / params: {"user_id":"22510358"}
+2019-08-21T11:09:16.565Z [right meow!] info: Got data for Profile: TomBurgess88
+2019-08-21T11:09:16.566Z [right meow!] info: Caling: users/show / params: {"user_id":"22511228"}
+2019-08-21T11:09:16.594Z [right meow!] info: 1 row added or modified
+2019-08-21T11:09:16.761Z [right meow!] info: Got data for Profile: Marketing_Forum
+2019-08-21T11:09:16.766Z [right meow!] info: end
+2019-08-21T11:09:16.783Z [right meow!] info: 1 row added or modified

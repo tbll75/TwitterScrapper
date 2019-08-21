@@ -1,10 +1,13 @@
+
+const logger = require ('./Logger');
+
 module.exports = {
 
     asyncForEach: async function (ar, callback)
     {
         for (let i = 0; i < ar.length; i++) {
 
-            //console.log("i: " + i);
+            //logger.info("i: " + i);
             await callback.call(ar, i, ar[i], ar);
         }
     },

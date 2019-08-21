@@ -5,6 +5,6 @@ module.exports = {
     HelloConsole: function()
     {
         return 'Hello world.';
-        console.log("Hello Console");
+        logger.info("Hello Console");
     }
 }

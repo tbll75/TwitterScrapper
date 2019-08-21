@@ -1,6 +1,7 @@
 const fs = require('fs');
 const readline = require('readline');
 const { google } = require('googleapis');
+const logger = require ('../../Util/Logger');
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
@@ -22,7 +23,7 @@ const client_id = "44445518282-477mh2puqh2r9tvvbruec7kinrqagku0.apps.googleuserc
  * @param {function} callback The callback to call with the authorized client.
  */
 function authorize(credentials, callback) {
-    //console.log("authorize");
+    //logger.info("authorize");
     const { client_secret, client_id, redirect_uris } = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(
         client_id, client_secret, redirect_uris[0]);
@@ -31,7 +32,7 @@ function authorize(credentials, callback) {
      fs.readFile(TOKEN_PATH, (err, token) => {
         if (err) return getNewToken(oAuth2Client, callback);
 
-        //console.log("setCredentials");
+        //logger.info("setCredentials");
         oAuth2Client.setCredentials(JSON.parse(token));
         callback(oAuth2Client);
     });
@@ -48,7 +49,7 @@ function getNewToken(oAuth2Client, callback) {
         access_type: 'offline',
         scope: SCOPES,
     });
-    console.log('Authorize this app by visiting this url:', authUrl);
+    logger.info('Authorize this app by visiting this url:', authUrl);
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
@@ -61,7 +62,7 @@ function getNewToken(oAuth2Client, callback) {
             // Store the token to disk for later program executions
             fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
                 if (err) return console.error(err);
-                console.log('Token stored to', TOKEN_PATH);
+                logger.info('Token stored to', TOKEN_PATH);
             });
             callback(oAuth2Client);
         });
@@ -79,16 +80,16 @@ function listMajors(auth) {
         spreadsheetId: '1SLnUaCFiTzvXagZeaZoTux5mmLFwoqQCCtCPYm31ztw',
         range: 'result_first!A1:A',
     }, (err, res) => {
-        if (err) return console.log('The API returned an error: ' + err);
+        if (err) return logger.info('The API returned an error: ' + err);
         const rows = res.data.values;
         if (rows.length) {
-            console.log('userId:');
+            logger.info('userId:');
             // Print columns A and E, which correspond to indices 0 and 4.
             rows.map((row) => {
-                console.log(`${row[0]}`);
+                logger.info(`${row[0]}`);
             });
         } else {
-            console.log('No data found.');
+            logger.info('No data found.');
         }
     });
 }
@@ -97,10 +98,10 @@ module.exports = {
 
     init: function (callback) {
         
-        //console.log("init");
+        //logger.info("init");
         // Load client secrets from a local file.
         fs.readFile("googleCredentials.json", (err, content) => {
-            if (err) return console.log('Error loading client secret file:', err);
+            if (err) return logger.info('Error loading client secret file:', err);
             // Authorize a client with credentials, then call the Google Sheets API.
             authorize(JSON.parse(content),callback);
         });
@@ -108,19 +109,19 @@ module.exports = {
 
     fetchSpreadsheetContent: function (auth, spreadsheetId, range, callback) {
 
-        console.log("fetchSpreadsheetContent");
+        logger.info("fetchSpreadsheetContent");
 
         const sheets = google.sheets({ version: 'v4', auth });
         sheets.spreadsheets.values.get({
             spreadsheetId: spreadsheetId,
             range: range,
         }, (err, res) => {
-            if (err) return console.log('The API returned an error: ' + err);
+            if (err) return logger.info('The API returned an error: ' + err);
             const rows = res.data.values;
             if (rows.length) {
                 callback(rows);
             } else {
-                console.log('No data found.');
+                logger.info('No data found.');
             }
         });
     }
