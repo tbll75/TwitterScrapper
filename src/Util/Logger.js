@@ -11,7 +11,7 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
 const logger = winston.createLogger({
     level: 'info',
     format: combine(
-        label({ label: 'right meow!' }),
+        label({ label: 'Mess: ' }),
         timestamp(),
         myFormat
       ),
