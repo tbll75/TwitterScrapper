@@ -1,1 +1,9 @@
 {"message":"test3","level":"error","service":"user-service"}
+2019-08-21T11:45:23.635Z [right meow!] error: [object Object]
+2019-08-21T11:47:41.379Z [right meow!] error: [object Object]
+2019-08-21T11:48:11.029Z [right meow!] error: [object Object]
+2019-08-21T11:50:57.155Z [right meow!] error: [object Object]
+2019-08-21T11:51:34.134Z [right meow!] error: [object Object]
+2019-08-21T11:51:34.134Z [right meow!] error: null
+2019-08-21T11:56:00.380Z [right meow!] error: [object Object]
+2019-08-21T11:56:00.381Z [right meow!] error: null

@@ -18,8 +18,15 @@ async function _makeTwitterCall(url, params, showFullLog)
     //if (global.isRateLimited && (Date.now()-global.dateRateLimited > new Date(0,0,0,0,0,5))) {
     if (global.isRateLimited) {
 
-        logger.info (Date.now().toLocaleString() + " - Exit because Rate Limited");
-        return null;
+        if (Date.now()-global.dateRateLimited > (60*15))  { // 15 minutes
+
+            global.isRateLimited = false;
+        }
+        else {
+
+            logger.info (Date.now().toLocaleString() + " - Exit because Rate Limited");
+            return null;
+        }
     }
     
     let response = null;
@@ -28,6 +35,7 @@ async function _makeTwitterCall(url, params, showFullLog)
         if (showFullLog) logger.info(response);
     } catch (error) {
         logger.error(error);
+        logger.error(response);
         //if (showFullLog && response !== null) logger.info(response);
 
 
