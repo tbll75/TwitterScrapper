@@ -23,7 +23,8 @@ async function launchEngine()
     //FetchersEngine.getNewProfilesFromFollowers(currentProfileId, 100);
     //await FetchersEngine.refreshTweetFromProfiles(2);
     //await FetchersEngine.refreshProfiles();
-    //FetchersEngine.getNewprofileFromSpreadsheet();
+    //await FetchersEngine.getNewprofileFromSpreadsheet();
+    //await FetchersEngine.refreshFollowers(1);
 
 
     // -- FOR TESTING
@@ -49,6 +50,11 @@ async function launchEngine()
     // Add lastTweetFetchDate in DB
     Cron.schedule('5,20,35,50 * * * *', () => {
         FetchersEngine.refreshTweetFromProfiles();
+    });
+
+    // CRON
+    Cron.schedule('10,25,40,55 * * * *', () => {
+        FetchersEngine.refreshFollowers();
     });
 
 

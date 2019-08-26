@@ -30,11 +30,19 @@ module.exports = {
         if (showFullLog) 
         {
             logger.info("executeQuery: " + sql);
-            logger.info("params: " + JSON.stringify(params));
+            if (params)
+                logger.info("params: " + JSON.stringify(params));
         }
 
         try {
+
             let [rows, fields] = await con.query(sql, params);
+/* 
+            if (params)
+                [rows, fields] = await con.query(sql, params);
+            else
+                [rows, fields] = await con.query(sql); */
+
             return rows;
         }
         catch (error) {

@@ -1,9 +1,9 @@
 const DataConnection = require ('./DataConnection');
 const logger = require ('../Util/Logger');
 
-async function updateLastTweetFetchDate(id) {
+async function updateLastColumnDate(id, dateColumn) {
     let sql = "UPDATE store.twProfiles "
-                + "set lastTweetFetchDate = NOW() "
+                + "set " + dateColumn + " = NOW() "
                 + "WHERE idProfile = ?"
 
     let params = [
@@ -128,7 +128,7 @@ module.exports = {
                 await DataConnection.executeQuery (sql, params, showFullLog);
                 logger.info("1 row added or modified");
 
-                await updateLastTweetFetchDate(profile.idProfile);
+                await updateLastColumnDate(profile.idProfile, "lastTweetFetchDate");
             }
             catch (error) {
                 if (error.message.includes("Duplicate") == false)
@@ -139,6 +139,34 @@ module.exports = {
             }
 
         });
+        
+        return true;
+    },
+
+    saveFollowers: async function (idProfileMaster, idProfileFollower, showFullLog = false) {
+
+        let sql = "INSERT INTO store.twFollowLink (idProfileMaster, idProfileFollower) VALUES ";
+
+        idProfileFollower.forEach(async element => {
+
+            sql += "('" + idProfileMaster + "','" + element + "'),";
+        });
+
+        sql = sql.substring(0, sql.length - 1); // remove last ,
+        sql += ";"
+
+        try {
+            await DataConnection.executeQuery (sql, null, showFullLog);
+            await updateLastColumnDate(idProfileMaster, "lastFollowersFetchDate");
+            logger.info("1 row added or modified");
+        }
+        catch (error) {
+            if (error.message.includes("Duplicate") == false)
+            {
+                logger.info("error: " + error);
+                logger.info(element);
+            }
+        }
         
         return true;
     },

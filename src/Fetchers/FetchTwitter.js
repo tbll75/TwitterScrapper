@@ -24,7 +24,7 @@ async function _makeTwitterCall(url, params, showFullLog)
         }
         else {
 
-            logger.info (Date.now().toLocaleString() + " - Exit because Rate Limited");
+            logger.info ("Exit because Rate Limited");
             return null;
         }
     }
@@ -32,7 +32,11 @@ async function _makeTwitterCall(url, params, showFullLog)
     let response = null;
     try {
         response = await T.get(url, params);
-        if (showFullLog) logger.info(response);
+        if (showFullLog) {
+            logger.info("resp: ", response);
+            console.log(response);
+        } 
+
     } catch (error) {
         logger.error(error);
         logger.error(response);
@@ -112,14 +116,44 @@ module.exports = {
         return response;
     },
 
-    getFollowerIds: function (id, count, showFullLog=false) {
+    getFollowerIds: async function (id, count, showFullLog=false) {
 
         var params = {
             user_id: id,
             count: count,
         }
 
-        return _makeTwitterCall('followers/ids', params, showFullLog);
+        let response = null;
+
+        try { 
+            response = await _makeTwitterCall('followers/ids', params, showFullLog);
+        } catch (error) {
+
+            if (error[0] !== undefined) {
+                if (error[0].code ==  50 || // User not found
+                    error[0].code ==  63) // User has been suspended
+                {
+                    DataSave.deleteProfile([id], showFullLog);
+                }
+                else
+                {
+                    console.log("test");
+                    logger.info(error);
+                    DataSave.updateLastUpdate(id, showFullLog, "lastFollowersFetchDate");
+                }
+            }
+            else {
+                console.log("test2");
+                DataSave.updateLastUpdate(id, showFullLog, "lastFollowersFetchDate");
+            }
+
+            return null;
+        }
+
+        if (response)
+            return response.ids;
+        else
+            return null;
     },
 
     getFollowingIds: function (id) {

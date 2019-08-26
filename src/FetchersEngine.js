@@ -90,21 +90,7 @@ module.exports = {
         logger.info("refreshProfiles");
 
         let nbProfileToFetch = overideFetchNumber != -1 ? overideFetchNumber : 900;
-
-        var profiles = await DataAccess.getAllProfiles(nbProfileToFetch, "order by lastUpdate", false);
-
-        /* profiles.forEach(async element => {
-
-            let fullProfile = await FetchTwitter.getUser(element.idProfile, false);
-            
-            if (fullProfile !== null) {
-                logger.info("Got data for Profile: " + fullProfile.screen_name);
-                DataSave.saveProfiles([fullProfile], false); 
-            }
-            else {
-                logger.info("Fail to get Profile for: " + element.idProfile);
-            }
-        }); */
+        let profiles = await DataAccess.getAllProfiles(nbProfileToFetch, "order by lastUpdate", false);
 
         if (profiles) {
 
@@ -115,6 +101,34 @@ module.exports = {
                 if (fullProfile !== null) {
                     logger.info("Got data for Profile: " + fullProfile.screen_name);
                     DataSave.saveProfiles([fullProfile], showFullLog = false); 
+                }
+                else {
+                    logger.info("Fail to get Profile for: " + element.idProfile);
+                }
+            });
+        }
+    },
+
+    refreshFollowers: async function (overideFetchNumber = -1) {
+
+        logger.info("refreshFollowers");
+
+        let nbProfileToFetch = overideFetchNumber != -1 ? overideFetchNumber : 15;
+        let profiles = await DataAccess.getAllProfiles(nbProfileToFetch, "order by lastFollowersFetchDate", false);
+
+        if (profiles) {
+
+            await ArrayExtensions.asyncForEach(profiles, async (next, element, index, array) => {
+
+                //logger.info(element);
+                let followersList = await FetchTwitter.getFollowerIds(element.idProfile, showFullLog = true);
+
+                if (followersList !== null) {
+                    //logger.info("followersList", followersList);
+                    //console.log(followersList.length);
+                    //console.log(followersList);
+                    logger.info("idProfileMaster: " + element.idProfile);
+                    DataSave.saveFollowers(element.idProfile, followersList, showFullLog = false); 
                 }
                 else {
                     logger.info("Fail to get Profile for: " + element.idProfile);
